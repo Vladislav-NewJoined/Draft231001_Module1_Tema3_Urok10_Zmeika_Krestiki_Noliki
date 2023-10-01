@@ -7,7 +7,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 //        Пример _ ППППППППППППППППППППППППППППППППППП  // _
-public class Task1_3_10_4 extends JPanel implements ActionListener {
+public class Task1_3_10_5 extends JPanel implements ActionListener {
 
     public static JFrame jFrame;
     public static final int SCALE = 32;
@@ -17,11 +17,14 @@ public class Task1_3_10_4 extends JPanel implements ActionListener {
     int counter;
 
     static Snake_4 s = new Snake_4(5, 6, 5, 5, 5, 4);
-    Apple apple = new Apple(Math.abs((int) (Math.random() * Task1_3_10_4.WIDTH - 1)), Math.abs((int) (Math.random() * Task1_3_10_4.HEIGHT - 1)));
-    Apple2 apple2 = new Apple2(Math.abs((int) (Math.random() * Task1_3_10_4.WIDTH - 1)), Math.abs((int) (Math.random() * Task1_3_10_4.HEIGHT - 1)));
+    Apple apple = new Apple(Math.abs((int) (Math.random() * Task1_3_10_5.WIDTH - 1)), Math.abs((int) (Math.random() * Task1_3_10_5.HEIGHT - 1)));
+    Apple2 apple2 = new Apple2(Math.abs((int) (Math.random() * Task1_3_10_5.WIDTH - 1)), Math.abs((int) (Math.random() * Task1_3_10_5.HEIGHT - 1)));
     Timer timer = new Timer(1000 / speed, this);
 
-    public Task1_3_10_4() {
+    static Obstacle o = new Obstacle(14, 2, 14, 1, 14, 0);
+    static Obstacle2 o2 = new Obstacle2(4, 17, 5, 17, 6, 17, 7, 17);
+
+    public Task1_3_10_5() {
         timer.start();
         addKeyListener(new KeyBoard());
         setFocusable(true); //Это чтобы находилось в центре экрана, 3 часть 08 57 , https://youtu.be/UEjMMnBGmgw
@@ -32,10 +35,12 @@ public class Task1_3_10_4 extends JPanel implements ActionListener {
         g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
 
         for (int x = 0; x < WIDTH * SCALE; x += SCALE) {
+//            g.setColor(Color.white);
             g.setColor(Color.black);
             g.drawLine(x, 0, x, HEIGHT * SCALE);
         }
         for (int y = 0; y < HEIGHT * SCALE; y += SCALE) {
+//            g.setColor(Color.white);
             g.setColor(Color.black);
             g.drawLine(0, y, WIDTH * SCALE, y);
         }
@@ -49,13 +54,25 @@ public class Task1_3_10_4 extends JPanel implements ActionListener {
             g.setColor(Color.white);
             g.fillRect(s.sX[0] * SCALE + 3, s.sY[0] * SCALE + 3, SCALE - 6, SCALE - 6);
         }
+
+        //Отрисовываем стены (препятствия)
+        for (int l = 0; l < o.lengthObstacle; l++) {
+            g.setColor(Color.gray);
+            g.fillRect(o.oX[l] * SCALE, o.oY[l] * SCALE, SCALE, SCALE);
+        }
+
+        for (int l = 0; l < o2.lengthObstacle2; l++) {
+            g.setColor(Color.gray);
+            g.fillRect(o2.oX2[l] * SCALE, o2.oY2[l] * SCALE, SCALE, SCALE);
+        }
+        //конец раздела: Отрисовываем стены (препятствия)
     }
 
     public static void main(String[] args) {
         System.out.println("""
                 Задание:\s
-                4. Доработайте змейку, что б на поле были фрукты. Если змейка их съедает -
-                   она растет. Если съела все фрукты - игрок победил.
+                5. Доработайте змейку, пусть на поле еще могут быть стены. в них тоже нельзя
+                   врезаться
 
                 Решение:\s
                 Мною добавлено уточняющее условие: победа наступает, если змейка съедает 4 яблока.""");
@@ -67,8 +84,14 @@ public class Task1_3_10_4 extends JPanel implements ActionListener {
         jFrame.setResizable(false);
         jFrame.setLocationRelativeTo(null);
 
-        jFrame.add(new Task1_3_10_4());
+        jFrame.add(new Task1_3_10_5());
         jFrame.setVisible(true);
+
+    }
+
+    public static int count(int counter) {
+        counter = 0;
+        return counter = 0;
     }
 
     @Override
@@ -77,6 +100,16 @@ public class Task1_3_10_4 extends JPanel implements ActionListener {
         // Лучше условие: Появление первоначальной таблички про победу после 4-х яблок.
         s.move();
         timer.start();
+//        timer.restart();
+
+        if (counter == 0) {
+            timer.stop();
+            JOptionPane.showMessageDialog(null, "To win, snake must eat 4 apples.");
+//                jFrame.setVisible(false);
+            jFrame.setVisible(true);
+            timer.restart();
+        }
+//            //Конец: лучше условие: Появление первоначальной таблички про победу после 4-х яблок.
 
         //пишем условие для победы (съедено 4 яблока)
         if ((s.sX[0] == apple.posX) && (s.sY[0] == apple.posY)) {
@@ -147,8 +180,44 @@ public class Task1_3_10_4 extends JPanel implements ActionListener {
         }
         //Конец условия, что происходит после съедения яблока и пересечения самой себя.
 
+
+        //Условие, что происходит при столкновении с препятствием.
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if ((s.sX[0] == o.oX[i]) && (s.sY[0] == o.oY[j])) {
+//                repaint();
+                    timer.stop();
+                    JOptionPane.showMessageDialog(null, "CRASH WITH OBSTACLE");
+                    jFrame.setVisible(false);
+//                    jFrame.setVisible(true);
+//                    timer.restart();
+//                break;
+                    System.exit(0);
+                }
+            }
+        }
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if ((s.sX[0] == o2.oX2[i]) && (s.sY[0] == o2.oY2[j])) {
+//                repaint();
+                    timer.stop();
+                    JOptionPane.showMessageDialog(null, "CRASH WITH OBSTACLE");
+                    jFrame.setVisible(false);
+//                    jFrame.setVisible(true);
+//                    timer.restart();
+//                break;
+                    System.exit(0);
+                }
+            }
+        }
+
+        //Конец условия, что происходит при столкновении с препятствием.
+
+
+
         //Snake collided into wall.
-        if (s.sX[0] > Task1_3_10_4.WIDTH - 1) {
+        if (s.sX[0] > Task1_3_10_5.WIDTH - 1) {
             timer.stop();
             JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over."/* + "Start again?"*/);
             jFrame.setVisible(false);
@@ -160,7 +229,7 @@ public class Task1_3_10_4 extends JPanel implements ActionListener {
             jFrame.setVisible(false);
             System.exit(0);
         }
-        if (s.sY[0] > Task1_3_10_4.HEIGHT - 1) {
+        if (s.sY[0] > Task1_3_10_5.HEIGHT - 1) {
             timer.stop();
             JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over."/* + "Start again?"*/);
             jFrame.setVisible(false);
@@ -175,7 +244,7 @@ public class Task1_3_10_4 extends JPanel implements ActionListener {
 //        }
         repaint();
 
-//        counter = count (counter) + 1;
+        counter = count (counter) + 1;
     }
 
     public class KeyBoard extends KeyAdapter {
@@ -188,4 +257,9 @@ public class Task1_3_10_4 extends JPanel implements ActionListener {
             if ((key == KeyEvent.VK_LEFT) && (s.direction != 1)) s.direction = 3;
         }
     }
+
+
 }
+/*class SnakeGame extends JPanel {
+
+}*/
