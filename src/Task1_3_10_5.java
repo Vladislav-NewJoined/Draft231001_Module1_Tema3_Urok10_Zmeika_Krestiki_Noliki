@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-//        Пример _ ППППППППППППППППППППППППППППППППППП  // _
 public class Task1_3_10_5 extends JPanel implements ActionListener {
 
     public static JFrame jFrame;
@@ -27,7 +25,7 @@ public class Task1_3_10_5 extends JPanel implements ActionListener {
     public Task1_3_10_5() {
         timer.start();
         addKeyListener(new KeyBoard());
-        setFocusable(true); //Это чтобы находилось в центре экрана, 3 часть 08 57 , https://youtu.be/UEjMMnBGmgw
+        setFocusable(true); //Это чтобы находилось в центре экрана
     }
 
     public void paint(Graphics g) {
@@ -35,12 +33,10 @@ public class Task1_3_10_5 extends JPanel implements ActionListener {
         g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
 
         for (int x = 0; x < WIDTH * SCALE; x += SCALE) {
-//            g.setColor(Color.white);
             g.setColor(Color.black);
             g.drawLine(x, 0, x, HEIGHT * SCALE);
         }
         for (int y = 0; y < HEIGHT * SCALE; y += SCALE) {
-//            g.setColor(Color.white);
             g.setColor(Color.black);
             g.drawLine(0, y, WIDTH * SCALE, y);
         }
@@ -78,7 +74,6 @@ public class Task1_3_10_5 extends JPanel implements ActionListener {
                 Мною добавлено уточняющее условие: победа наступает, если змейка съедает 4 яблока.""");
 
         jFrame = new JFrame("Snake");
-//        jFrame.setSize(WIDTH*SCALE+17,HEIGHT*SCALE+40);
         jFrame.setSize(WIDTH * SCALE + 14, HEIGHT * SCALE + 37);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jFrame.setResizable(false);
@@ -96,7 +91,6 @@ public class Task1_3_10_5 extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-//            ПРОПИСЫВАЕМ MUST EAT 4 APPLES чтобы не каждый раз
         // Лучше условие: Появление первоначальной таблички про победу после 4-х яблок.
         s.move();
         timer.start();
@@ -139,8 +133,6 @@ public class Task1_3_10_5 extends JPanel implements ActionListener {
         }
         //конец условия для победы
 
-
-
         //Условие, что происходит после съедения яблока и пересечения самой себя.
         if ((s.sX[0] == apple.posX) && (s.sY[0] == apple.posY)) {
             apple.setRandomPosition();
@@ -168,30 +160,24 @@ public class Task1_3_10_5 extends JPanel implements ActionListener {
             }
             //Конец условия, что происходит после съедения яблока.
 
-
             //Snake crossed itself
             if ((s.sX[0] == s.sX[l]) && (s.sY[0] == s.sY[l])) {
 //                System.out.println("crash");
                 timer.stop();
-                JOptionPane.showMessageDialog(null, "You lost. Snake crossed itself. Game over."/* + "Start again?"*/);
+                JOptionPane.showMessageDialog(null, "You lost. Snake crossed itself. Game over.");
                 jFrame.setVisible(false);
                 System.exit(0);
             }
         }
         //Конец условия, что происходит после съедения яблока и пересечения самой себя.
 
-
         //Условие, что происходит при столкновении с препятствием.
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if ((s.sX[0] == o.oX[i]) && (s.sY[0] == o.oY[j])) {
-//                repaint();
                     timer.stop();
                     JOptionPane.showMessageDialog(null, "CRASH WITH OBSTACLE");
                     jFrame.setVisible(false);
-//                    jFrame.setVisible(true);
-//                    timer.restart();
-//                break;
                     System.exit(0);
                 }
             }
@@ -200,48 +186,40 @@ public class Task1_3_10_5 extends JPanel implements ActionListener {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if ((s.sX[0] == o2.oX2[i]) && (s.sY[0] == o2.oY2[j])) {
-//                repaint();
                     timer.stop();
                     JOptionPane.showMessageDialog(null, "CRASH WITH OBSTACLE");
                     jFrame.setVisible(false);
-//                    jFrame.setVisible(true);
-//                    timer.restart();
-//                break;
                     System.exit(0);
                 }
             }
         }
-
         //Конец условия, что происходит при столкновении с препятствием.
-
-
 
         //Snake collided into wall.
         if (s.sX[0] > Task1_3_10_5.WIDTH - 1) {
             timer.stop();
-            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over."/* + "Start again?"*/);
+            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over.");
             jFrame.setVisible(false);
             System.exit(0);
         }
         if (s.sX[0] < 0) {
             timer.stop();
-            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over."/* + "Start again?"*/);
+            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over.");
             jFrame.setVisible(false);
             System.exit(0);
         }
         if (s.sY[0] > Task1_3_10_5.HEIGHT - 1) {
             timer.stop();
-            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over."/* + "Start again?"*/);
+            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over.");
             jFrame.setVisible(false);
             System.exit(0);
         }
         if (s.sY[0] < 0) {
             timer.stop();
-            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over."/* + "Start again?"*/);
+            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over.");
             jFrame.setVisible(false);
             System.exit(0);
         }
-//        }
         repaint();
 
         counter = count (counter) + 1;
@@ -260,6 +238,3 @@ public class Task1_3_10_5 extends JPanel implements ActionListener {
 
 
 }
-/*class SnakeGame extends JPanel {
-
-}*/

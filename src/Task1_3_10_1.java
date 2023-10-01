@@ -1,7 +1,3 @@
-
-import java.util.Scanner;
-
-//        Пример _ ППППППППППППППППППППППППППППППППППП  //СДЕЛАН ОКОНЧАТЕЛЬНО, ОТПРАВЛЕН В ЭТОМ ВИДЕ !!!!!
 public class Task1_3_10_1 {
     public static void main(String[] args) {
         System.out.println("""
