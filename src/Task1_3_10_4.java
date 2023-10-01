@@ -59,7 +59,6 @@ public class Task1_3_10_4 extends JPanel implements ActionListener {
                 Мною добавлено уточняющее условие: победа наступает, если змейка съедает 4 яблока.""");
 
         jFrame = new JFrame("Snake");
-//        jFrame.setSize(WIDTH*SCALE+17,HEIGHT*SCALE+40);
         jFrame.setSize(WIDTH * SCALE + 14, HEIGHT * SCALE + 37);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jFrame.setResizable(false);
@@ -102,8 +101,6 @@ public class Task1_3_10_4 extends JPanel implements ActionListener {
         }
         //конец условия для победы
 
-
-
         //Условие, что происходит после съедения яблока и пересечения самой себя.
         if ((s.sX[0] == apple.posX) && (s.sY[0] == apple.posY)) {
             apple.setRandomPosition();
@@ -133,7 +130,6 @@ public class Task1_3_10_4 extends JPanel implements ActionListener {
 
             //Snake crossed itself
             if ((s.sX[0] == s.sX[l]) && (s.sY[0] == s.sY[l])) {
-//                System.out.println("crash");
                 timer.stop();
                 JOptionPane.showMessageDialog(null, "You lost. Snake crossed itself. Game over."/* + "Start again?"*/);
                 jFrame.setVisible(false);
@@ -145,25 +141,25 @@ public class Task1_3_10_4 extends JPanel implements ActionListener {
         //Snake collided into wall.
         if (s.sX[0] > Task1_3_10_4.WIDTH - 1) {
             timer.stop();
-            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over."/* + "Start again?"*/);
+            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over.");
             jFrame.setVisible(false);
             System.exit(0);
         }
         if (s.sX[0] < 0) {
             timer.stop();
-            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over."/* + "Start again?"*/);
+            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over.");
             jFrame.setVisible(false);
             System.exit(0);
         }
         if (s.sY[0] > Task1_3_10_4.HEIGHT - 1) {
             timer.stop();
-            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over."/* + "Start again?"*/);
+            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over.");
             jFrame.setVisible(false);
             System.exit(0);
         }
         if (s.sY[0] < 0) {
             timer.stop();
-            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over."/* + "Start again?"*/);
+            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over.");
             jFrame.setVisible(false);
             System.exit(0);
         }

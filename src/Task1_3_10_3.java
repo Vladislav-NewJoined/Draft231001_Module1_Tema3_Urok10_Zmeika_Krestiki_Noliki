@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -61,7 +60,6 @@ public class Task1_3_10_3 extends JPanel implements ActionListener {
 
         jFrame.add(new Task1_3_10_3());
         jFrame.setVisible(true);
-
     }
 
     public static int count(int counter) {

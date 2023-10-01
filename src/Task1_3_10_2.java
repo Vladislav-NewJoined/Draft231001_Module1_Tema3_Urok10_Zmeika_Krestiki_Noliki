@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -45,7 +44,7 @@ public class Task1_3_10_2 extends JPanel implements ActionListener {
     public static void main(String[] args) {
         System.out.println("""
                 Задание:\s
-                2. Напишите “змейку”. Есть поле 20х20, есть змейка длинной, пусть, 3
+                3. Напишите “змейку”. Есть поле 20х20, есть змейка длинной, пусть, 3
                 квадрата. Выводится поле с положением змейки. Пользователь вводит, куда
                 сделать следующий шаг - повернуть, или не двигаться. Рисуется поле с
                 новым положением змейки.

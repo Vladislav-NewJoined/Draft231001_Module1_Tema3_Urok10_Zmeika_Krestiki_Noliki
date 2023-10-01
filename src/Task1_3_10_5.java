@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -75,7 +74,6 @@ public class Task1_3_10_5 extends JPanel implements ActionListener {
                 Мною добавлено уточняющее условие: победа наступает, если змейка съедает 4 яблока.""");
 
         jFrame = new JFrame("Snake");
-//        jFrame.setSize(WIDTH*SCALE+17,HEIGHT*SCALE+40);
         jFrame.setSize(WIDTH * SCALE + 14, HEIGHT * SCALE + 37);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jFrame.setResizable(false);
@@ -83,6 +81,7 @@ public class Task1_3_10_5 extends JPanel implements ActionListener {
 
         jFrame.add(new Task1_3_10_5());
         jFrame.setVisible(true);
+
     }
 
     public static int count(int counter) {
@@ -92,7 +91,7 @@ public class Task1_3_10_5 extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Появление первоначальной таблички про победу после 4-х яблок.
+        // Лучше условие: Появление первоначальной таблички про победу после 4-х яблок.
         s.move();
         timer.start();
 //        timer.restart();
@@ -104,7 +103,7 @@ public class Task1_3_10_5 extends JPanel implements ActionListener {
             jFrame.setVisible(true);
             timer.restart();
         }
-//            //Конец: Появление первоначальной таблички про победу после 4-х яблок.
+//            //Конец: лучше условие: Появление первоначальной таблички про победу после 4-х яблок.
 
         //пишем условие для победы (съедено 4 яблока)
         if ((s.sX[0] == apple.posX) && (s.sY[0] == apple.posY)) {
@@ -161,11 +160,11 @@ public class Task1_3_10_5 extends JPanel implements ActionListener {
             }
             //Конец условия, что происходит после съедения яблока.
 
-
             //Snake crossed itself
             if ((s.sX[0] == s.sX[l]) && (s.sY[0] == s.sY[l])) {
+//                System.out.println("crash");
                 timer.stop();
-                JOptionPane.showMessageDialog(null, "You lost. Snake crossed itself. Game over."/* + "Start again?"*/);
+                JOptionPane.showMessageDialog(null, "You lost. Snake crossed itself. Game over.");
                 jFrame.setVisible(false);
                 System.exit(0);
             }
@@ -194,35 +193,33 @@ public class Task1_3_10_5 extends JPanel implements ActionListener {
                 }
             }
         }
-
         //Конец условия, что происходит при столкновении с препятствием.
 
         //Snake collided into wall.
         if (s.sX[0] > Task1_3_10_5.WIDTH - 1) {
             timer.stop();
-            JOptionPane.showMessageDialog(null, "You lost. Snake crashed into the wall. Game over."/* + "Start again?"*/);
+            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over.");
             jFrame.setVisible(false);
             System.exit(0);
         }
         if (s.sX[0] < 0) {
             timer.stop();
-            JOptionPane.showMessageDialog(null, "You lost. Snake crashed into the wall. Game over."/* + "Start again?"*/);
+            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over.");
             jFrame.setVisible(false);
             System.exit(0);
         }
         if (s.sY[0] > Task1_3_10_5.HEIGHT - 1) {
             timer.stop();
-            JOptionPane.showMessageDialog(null, "You lost. Snake crashed into the wall. Game over."/* + "Start again?"*/);
+            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over.");
             jFrame.setVisible(false);
             System.exit(0);
         }
         if (s.sY[0] < 0) {
             timer.stop();
-            JOptionPane.showMessageDialog(null, "You lost. Snake crashed into the wall. Game over."/* + "Start again?"*/);
+            JOptionPane.showMessageDialog(null, "You lost. Snake collided into wall. Game over.");
             jFrame.setVisible(false);
             System.exit(0);
         }
-//        }
         repaint();
 
         counter = count (counter) + 1;
