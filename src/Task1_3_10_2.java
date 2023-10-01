@@ -6,9 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-//        Пример _ ППППППППППППППППППППППППППППППППППП  /третья часть закончена, правильно до конца третьей части, отсюда:
-//        третья часть https://www.youtube.com/watch?v=UEjMMnBGmgw
-
 public class Task1_3_10_2 extends JPanel implements ActionListener {
 
     public static JFrame jFrame;
